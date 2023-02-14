@@ -1,11 +1,13 @@
-package com.example.ktt.repository;
+package com.ktt.repository;
 
-import com.example.ktt.entity.Quote;
-import com.example.ktt.entity.User;
+import com.ktt.entity.Quote;
+import com.ktt.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface QuoteRepository extends JpaRepository<Quote, Long> {
 
     List<Quote> getAllBy();

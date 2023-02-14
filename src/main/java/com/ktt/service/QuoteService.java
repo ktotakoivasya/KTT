@@ -1,9 +1,9 @@
-package com.example.ktt.service;
+package com.ktt.service;
 
-import com.example.ktt.entity.Quote;
-import com.example.ktt.entity.User;
+import com.ktt.entity.Quote;
 
 import java.util.List;
+
 
 public interface QuoteService {
 
@@ -15,6 +15,12 @@ public interface QuoteService {
 
     void delete(String email, Quote quote);
 
-    void vote(Quote quote, String email, Long vote);
+    void upVote(Quote quote);
+
+    void downVote(Quote quote);
+
+    List<Quote> getTop10();
+
+    List<Quote> getFlop10();
 
 }

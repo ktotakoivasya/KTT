@@ -1,4 +1,5 @@
-package com.example.ktt.service;
+package com.ktt.service;
 
 public interface UserService {
+
 }

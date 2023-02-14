@@ -1,4 +1,4 @@
-package com.example.ktt.entity;
+package com.ktt.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
