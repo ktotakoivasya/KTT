@@ -16,5 +16,7 @@ public interface QuoteRepository extends JpaRepository<Quote, Long> {
 
     List<Quote> getAllByUser(User user);
 
+    Quote getRndmQuote();
+
 
 }

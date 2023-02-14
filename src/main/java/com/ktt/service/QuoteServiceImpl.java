@@ -1,23 +1,16 @@
 package com.ktt.service;
 
 import com.ktt.entity.Quote;
+import com.ktt.entity.User;
 import com.ktt.repository.QuoteRepository;
 import com.ktt.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class QuoteServiceImpl implements QuoteService {
-
-    @Autowired
     private final QuoteRepository quoteRepository;
-    @Autowired
     private final UserRepository userRepository;
 
     public QuoteServiceImpl(QuoteRepository quoteRepository, UserRepository userRepository) {
@@ -32,11 +25,8 @@ public class QuoteServiceImpl implements QuoteService {
     }
 
     @Override
-    public void createQuote(String email, String content) {
-        Quote newQuote = new Quote();
-        newQuote.setUser(userRepository.getUserByEmail(email));
-        newQuote.setContent(content);
-        newQuote.setCreationOrUpdate(LocalDate.now());
+    public void createQuote(User user, String content) {
+        Quote newQuote = new Quote(user, content);
         quoteRepository.save(newQuote);
     }
 
@@ -87,5 +77,13 @@ public class QuoteServiceImpl implements QuoteService {
             flop10.add(allQuotes.get(i));
         }
         return flop10;
+    }
+
+    @Override
+    public Quote getRndmQuote() {
+        List<Quote> allQuotes = quoteRepository.getAllBy();
+        Random randomizer = new Random();
+        Quote rndmQuote = allQuotes.get(randomizer.nextInt(allQuotes.size()));
+        return rndmQuote;
     }
 }

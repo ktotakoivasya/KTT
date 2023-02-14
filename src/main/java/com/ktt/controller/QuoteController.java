@@ -1,21 +1,19 @@
 package com.ktt.controller;
 
 import com.ktt.entity.Quote;
+import com.ktt.entity.User;
 import com.ktt.service.QuoteServiceImpl;
-import com.ktt.service.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class QuoteController {
-    @Autowired
-    private QuoteServiceImpl quoteService;
-    @Autowired
-    private UserServiceImpl userService;
+    private final QuoteServiceImpl quoteService;
+
+    public QuoteController(QuoteServiceImpl quoteService) {
+        this.quoteService = quoteService;
+    }
 
     @GetMapping("/allQuotes")
     List<Quote> all() {
@@ -32,30 +30,37 @@ public class QuoteController {
         return quoteService.getFlop10();
     }
 
-    @PostMapping("/profile")
-    void createQuote(String email, String content) {
-        quoteService.createQuote(email, content);
+    @GetMapping("/allQuotes/rndm")
+    Quote getRndmQuote() {
+        return quoteService.getRndmQuote();
     }
 
     @PostMapping("/profile")
+    void createQuote(User user, String content) {
+        quoteService.createQuote(user, content);
+    }
+
+    @PutMapping("/profile")
     void updateQuote(Quote quote, String changes) {
         quoteService.updateQuote(quote, changes);
     }
 
-    @PostMapping("/profile")
+    @DeleteMapping("/profile")
     void delete(String email, Quote quote) {
         quoteService.delete(email, quote);
     }
 
-    @PostMapping("/allQuotes")
+    @PostMapping("/allQuotes/up")
     void upVote(Quote quote) {
         quoteService.upVote(quote);
     }
 
-    @PostMapping("/allQuotes")
+    @PostMapping("/allQuotes/down")
     void downVote(Quote quote) {
         quoteService.downVote(quote);
     }
+
+
 
 
 }

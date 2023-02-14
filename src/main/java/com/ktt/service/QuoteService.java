@@ -1,6 +1,7 @@
 package com.ktt.service;
 
 import com.ktt.entity.Quote;
+import com.ktt.entity.User;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface QuoteService {
 
     List<Quote> getAllQuotes();
 
-    void createQuote(String email, String content);
+    void createQuote(User user, String content);
 
     void updateQuote(Quote quote, String changes);
 
@@ -22,5 +23,7 @@ public interface QuoteService {
     List<Quote> getTop10();
 
     List<Quote> getFlop10();
+
+    Quote getRndmQuote();
 
 }
